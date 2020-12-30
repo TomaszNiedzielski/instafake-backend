@@ -25,5 +25,10 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Interfaces\FollowInterface',
             'App\Repositories\FollowRepository'
         );
+
+        $this->app->bind(
+            'App\Interfaces\AvatarInterface',
+            'App\Repositories\AvatarRepository'
+        );
     }
 }
