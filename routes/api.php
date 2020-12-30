@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FollowController;
+use App\Http\Controllers\AvatarController;
 
 use Illuminate\Support\Facades\Log;
 
@@ -19,8 +20,6 @@ use Illuminate\Support\Facades\Log;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Log::info('in routing');
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
@@ -44,4 +43,8 @@ Route::group(['middleware' => 'auth:api', 'prefix' => 'users'], function ($route
 Route::group(['middleware' => 'auth:api'], function ($router) {
     Route::post('/follow', [FollowController::class, 'follow']);
     Route::post('/unfollow', [FollowController::class, 'unfollow']);
+});
+
+Route::group(['middleware' => 'auth:api', 'prefix' => 'avatar'], function ($router) {
+    Route::post('/upload', [AvatarController::class, 'storeAvatar']);
 });
